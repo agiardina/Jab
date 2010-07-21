@@ -1,7 +1,17 @@
 jab = {}
 jab.ui = {}
 
-jab.protoBy = function (parent,child) {
+/**
+* Define the prototype object for a function.
+* If child param == undefined a new constructor
+* it create a new function that apply parent constructor.
+* If child param == false create an empty function and
+* return its prototype
+* @param {Function} parent the parent function to
+* @param {Function} child  the object constructor
+* @return {Object} Returns the prototype object
+*/
+jab.prototypeFrom = function (parent,child) {
     if (!child) {
         if (typeof child === 'undefined') {
             child = function(){
