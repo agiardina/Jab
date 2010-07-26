@@ -1,14 +1,20 @@
 jab.ui.Button = function() {
 
-    Button = function() {}.prototype;
+    var button = new Widget();
 
-    Button.size = function(w,h) {
+    return function() {
+        console.log('I am a button');
+    }.prototype = button
+
+    button.size = function(w,h) {
         this.width = w;
         this.height = h;
     };
 
-    return Button.constructor;
+    button.click = function() {
+        console.log('clicked');
+    };
+
+    return Constructor;
 
 }();
-
-
