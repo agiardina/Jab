@@ -1,0 +1,44 @@
+html { height: 100% }
+body { height: 100%; margin: 0px; padding: 0px; }
+
+.hide {
+    display:none;
+}
+
+.left {
+    float:left;
+}
+
+.right {
+    float:right;
+}
+
+.horizontal > div {
+    display:inline-block;
+    height:100%;
+}
+
+.horizontal.p2 > div { width:100%}
+.horizontal.p2 > div { width:50%}
+.horizontal.p3 > div { width:33%}
+.horizontal.p3 > div:last-child { width:34%}
+.horizontal.p4 > div { width:25%}
+.horizontal.p5 > div { width:20%}
+
+
+.main {
+    width:400px;
+    height:200px;
+}
+
+.toolbar {
+    background:blue;
+}
+
+.footer {
+    background:green;
+}
+
+.body {
+    background:violet;
+}
