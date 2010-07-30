@@ -1,10 +1,23 @@
 jab.html.Element = function() {
     var element = {},
-        dom = ['hasClass','addClass','removeClass','width'];
+        dom = ['hasClass','addClass','removeClass','width', 'height'];
 
     element.constructor = function() {
-        this._node = {};
+        this._node = undefined;
     }
+
+    element.init = function(className,id) {
+        if (typeof this._node == 'object') {
+            throw "Element.init: impossibile to init more than one node";
+        } else {
+            this._node = document.createElement('div');
+            this._node.className = className;
+            if (typeof id != 'undefined') {
+                this._node.id = id
+            }
+        }
+        return this;
+    },
 
     element.load = function(node) {
        this._node = node;

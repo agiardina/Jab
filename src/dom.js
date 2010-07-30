@@ -6,7 +6,6 @@ jab.dom = function(element) {
     }
 }
 
-
 jab.dom.addClass = function(el,classname) {
     if (jab.dom.hasClass(el, classname)) {
         return jab.dom;
@@ -30,6 +29,14 @@ jab.dom.width = function(el,width) {
         width = width + "px";
     }
     el.style.width = width;
+    return jab.dom;
+}
+
+jab.dom.height = function(el,height) {
+    if (parseInt(height) == height) {
+        height = height + "px";
+    }
+    el.style.height = height;
     return jab.dom;
 }
 

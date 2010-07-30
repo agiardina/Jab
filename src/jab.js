@@ -1,5 +1,6 @@
-jab = {}
-jab.ui = {}
+jab = {};
+jab.html = {};
+jab.ui   = {};
 
 /**
 * Define the prototype object for a function.
