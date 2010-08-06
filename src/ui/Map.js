@@ -12,12 +12,26 @@ jab.ui.Map = function() {
     map.show = function (lat, lng) {
         var latlng = new google.maps.LatLng(lat, lng),
             options = {
-                zoom: 8,
+                zoom: 12,
                 center: latlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeControl: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                navigationControlOptions: {style: google.maps.NavigationControlStyle.ANDROID},
             };
 
         this._map = new google.maps.Map(this.node(), options);
+        return this;
+    };
+
+    map.autoCenter = function() {
+        var self = this;
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                self.show(position.coords.latitude,position.coords.longitude);
+            }, function() {
+                self.show(10,10);
+            });
+        }
         return this;
     };
 

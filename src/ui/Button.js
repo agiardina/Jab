@@ -1,20 +1,21 @@
 jab.ui.Button = function() {
 
-    var button = new Widget();
+    var button = new jab.ui.Widget();
 
-    return function() {
-        console.log('I am a button');
-    }.prototype = button
-
-    button.size = function(w,h) {
-        this.width = w;
-        this.height = h;
+    button.constructor = function() {
+        this._className = 'button';
     };
 
-    button.click = function() {
-        console.log('clicked');
+    /**
+     * @param {String} label the label for the button
+     */
+    button.label = function(label) {
+        this.node().innerHTML = "<span>" + label + "</span>";
+        return this;
     };
 
-    return Constructor;
+    button.constructor.prototype = button;
+
+    return button.constructor;
 
 }();

@@ -30,3 +30,31 @@ jab.prototypeFrom = function (parent,child) {
 
     return child.prototype;
 }
+
+
+/**
+ * Load dinamycally a list of javascripts files.
+ * @param {Array}
+ */
+jab.load = function(scripts) {
+    for (var i=0, len=scripts.length;i<len;i++) {
+        document.write('<script src="'+scripts[i]+'" type="text/javascript"></script>');
+    }
+};
+
+
+jab.load([
+    "http://maps.google.com/maps/api/js?sensor=true",
+    "/Jab/src/dom.js",
+    "/Jab/src/html/Element.js",
+    "/Jab/src/ui/Widget.js",
+    "/Jab/src/ui/Button.js",
+    "/Jab/src/ui/Layout.js",
+    "/Jab/src/ui/Map.js",
+    "/Jab/src/ui/Button.js",
+    "/Jab/src/mvp/AppController.js",
+    "/Jab/src/mvp/View.js",
+    "/Jab/src/mvp/Presenter.js",
+]);
+
+
