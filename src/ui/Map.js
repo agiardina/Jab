@@ -50,30 +50,43 @@ jab.ui.Map = function() {
      * @param {String} icon The icon path if a custom icon is required
      * @param {String} id An id to memorize the marker somewhere
      * @return {jab.ui.Map} The map itself for chaining
+     * @todo Replace the marker with a custom overlay for better performances
      */
     map.addMarker = function(lat,lng,title,icon,id) {
-         var markerLatLng = new google.maps.LatLng(lat, lng),
+        //MarkerLatLng and options
+        var markerLatLng = new google.maps.LatLng(lat, lng),
              markerOptions =  {
                  position: markerLatLng,
                  map: this._map
              },
-             marker;
+             marker
+             self = this;
 
-         if (typeof title != 'undefined') {
-             markerOptions.title = title;
-         }
+        //Add more default options
+        if (typeof title != 'undefined') {
+            markerOptions.title = title;
+        }
 
-         if (typeof icon != 'undefined') {
-             markerOptions.icon = icon;
-         }
+        if (typeof icon != 'undefined') {
+            markerOptions.icon = icon;
+        }
 
-         marker = new google.maps.Marker(markerOptions);
-         if (typeof id != 'undefined') {
-             this._markers[id] = marker;
-         }
+        //Create the marker
+        marker = new google.maps.Marker(markerOptions);
+
+        //Create a wrapper for the listener
+        google.maps.event.addListener(marker, 'click', function() {
+            self.events().fireEvent('markerClick');
+        });
          
-         return this;
+        if (typeof id != 'undefined') {
+            this._markers[id] = marker;
+            marker.id = id;
+        }
+         
+        return marker;
     };
+
 
     /**
      * Return a marker using the param id
