@@ -9,10 +9,10 @@ jab.EventsManager = function(){
      */
     manager.get = function(evName) {
         var event;
-        if (typeof this[evName] == 'undefined') {
-            this[evName] = new jab.Event();
+        if (typeof this._events[evName] == 'undefined') {
+            this._events[evName] = new jab.Event();
         }
-        event = this[evName];
+        event = this._events[evName];
 
         return event;
     };
@@ -25,18 +25,54 @@ jab.EventsManager = function(){
      */
     manager.add = function(evName,event) {
         if (typeof event == 'undefined') {
-            this[evName] = new jab.Event();
+            this._events[evName] = new jab.Event();
         } else {
-            this[evName] = event;
+            this._events[evName] = event;
         }
-        return this[evName];
+        return this._events[evName];
+    };
+
+    /**
+     * @param {String} evName The event to handle
+     * @param {Function} handler The event handler
+     * @return The events manager to chaininig
+     */
+    manager.addEventListener = function(evName,handler) {
+        this.get(evName).addListener(handler);
+        return this;
+    };
+
+    /**
+     * Return the number of listeners the event has
+     * @param {String} evName The event to check
+     * @return {Number} The number of listener the event has
+     */
+    manager.hasEventListener = function(evName) {
+        if (typeof this._events[evName] == 'undefined') {
+            return 0;
+        }
+
+        return this._events[evName].hasListener();
+    };
+
+    /**
+     * Fire an event
+     * @param {String} evName The event to fire
+     * @param {Mixed} data The optional data to pass to event
+     */
+    manager.fireEvent = function(evName,data) {
+        return this.get(evName).fire(data);
     };
 
     /**
      * The event manager constructor;
+     * @param {Object} target The default target
      */
-    manager.constructor = function() {
+    manager.constructor = function(target) {
         this._events  = [];
+        if (typeof target != 'undefined') {
+            this._target = target;
+        }
     };
 
     manager.constructor.prototype = manager;

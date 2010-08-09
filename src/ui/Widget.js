@@ -15,13 +15,6 @@ jab.ui.Widget = function() {
         return this;
     };
 
-    widget.on = function(evName,listener) {
-        var self = this;
-        this.node().addEventListener(evName, function(){
-            listener.apply(self,arguments);
-        });
-    };
-
     widget.appendTo = function(target) {
         if (target instanceof HTMLElement) {
             target.appendChild(this.node());

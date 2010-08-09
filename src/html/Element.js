@@ -1,5 +1,5 @@
 jab.html.Element = function() {
-    var element = {},
+    var element = new jab.MVPObject(),
         dom = ['hasClass','addClass','removeClass','width', 'height'];
 
     element._element = 'div';
@@ -37,6 +37,24 @@ jab.html.Element = function() {
         return this._node;
     }
 
+    /**
+     * Return the events manager and load it if necessary
+     * @return {jab.DomEventsManager}
+     */
+    element.events = function() {
+        //Lazy loading of events manager
+        var events = new jab.DomEventsManager(this);
+        //Replace the events function
+        this.events = function() {
+            return events;
+        }
+        return this.events();
+
+    };    
+
+    /**
+     * Copy methods from jab.dom
+     */
     for (var i=0,len=dom.length;i<len;i++) {
         var fn = dom[i];
         element[fn] = function(f) {

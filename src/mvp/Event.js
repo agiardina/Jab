@@ -15,6 +15,14 @@ jab.Event = function() {
     };
 
     /**
+     * Return the number of listeners the event has
+     * @return {Number} The number of listener the event has
+     */
+    event.hasListener = function() {
+        return this._listeners.length;
+    };
+
+    /**
      * @param {Mixed} data The optional data to pass to the handler when
      * the event is fired
      * @return the event for chaining
