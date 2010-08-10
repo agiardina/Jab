@@ -36,7 +36,7 @@ jab.dom.hasClass = function(el,classname) {
 /**
  * Add a class to dom element
  * @param {HTMLElement} el The target HTMLELement
- * @params {String} classname The css class to add to element
+ * @param {String} classname The css class to add to element
  * @return {Function} Return the jab.dom function to allow chaininig
  */
 jab.dom.addClass = function(el,classname) {
@@ -44,7 +44,12 @@ jab.dom.addClass = function(el,classname) {
         return jab.dom;
     }
 
-    el.className = classname + ' ' + el.className;
+    if (el.className.length) {
+        el.className = el.className + ' ' + classname ;
+    } else {
+        el.className = classname;
+    }
+    
     return jab.dom;
 };
 
