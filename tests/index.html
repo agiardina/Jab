@@ -3,21 +3,38 @@
   <head>
     <title>Tests suit</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
 
     <script type="text/javascript" charset="utf-8" src="http://yui.yahooapis.com/3.1.1/build/yui/yui-min.js"></script>
     <script type="text/javascript" src="../src/jab.js"></script>
-    
     <script type="text/javascript">
+jab.init('..');
+jab.load(['src/dom.js']);
 
-YUI().use('test', function(Y) {
+var Y;
+YUI().use('console','test', function(X) {
+    Y = X;
+    //create the test suite
+    var testSuite = new Y.Test.Suite("Jab TestSuite");
+    
+    testSuite.add(new Y.Test.Case(testDom));
 
-    // Test available, and ready for use.
-
-});
+    //initialize the console
+    var yconsole = new Y.Console({
+        newestOnTop: false,
+        style:'block',
+        //logLevel: 'error'
+    });
+    yconsole.render('#log');
+    
+    Y.Test.Runner.add(testSuite);
+    Y.Test.Runner.run();
+})
 
     </script>
   </head>
-  <body>
-    
+  <body class="yui3-skin-sam">
+      <div id="log"></div>
+      <div id="main"></div>
   </body>
 </html>
