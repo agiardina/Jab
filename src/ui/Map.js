@@ -37,6 +37,7 @@ jab.ui.Map = function() {
         return this;
     };
 
+
     /**
      * Add a marker to the map. If the id param is used the marker will be
      * stored to be used after. There is no check to verify if a marker
@@ -76,7 +77,7 @@ jab.ui.Map = function() {
 
         //Create a wrapper for the listener
         google.maps.event.addListener(marker, 'click', function() {
-            self.events().fireEvent('markerClick');
+            self.events().fireEvent('markerClick',marker);
         });
          
         if (typeof id != 'undefined') {
@@ -86,7 +87,6 @@ jab.ui.Map = function() {
          
         return marker;
     };
-
 
     /**
      * Return a marker using the param id

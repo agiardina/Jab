@@ -25,10 +25,11 @@ jab.EventsManager = function(){
      */
     manager.add = function(evName,event) {
         if (typeof event == 'undefined') {
-            this._events[evName] = new jab.Event();
-        } else {
-            this._events[evName] = event;
+            event = new jab.Event();
         }
+
+        this._events[evName] = event;
+        
         return this._events[evName];
     };
 
@@ -56,12 +57,16 @@ jab.EventsManager = function(){
     };
 
     /**
-     * Fire an event
+     * Fire an event.
+     * If the event managet has a target the event will have the same target
      * @param {String} evName The event to fire
      * @param {Mixed} data The optional data to pass to event
      */
     manager.fireEvent = function(evName,data) {
-        return this.get(evName).fire(data);
+        var event=this.get(evName);
+
+        event.target = this._target;
+        return event.fire(data);
     };
 
     /**

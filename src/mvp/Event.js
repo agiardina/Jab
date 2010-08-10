@@ -31,7 +31,7 @@ jab.Event = function() {
         var fn;
         for (var i in this._listeners) {
             fn = this._listeners[i];
-            fn.call(this,data);
+            fn.call(this.target,this,data);
         }
         return this;
     };
