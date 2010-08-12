@@ -34,6 +34,18 @@ jab.dom.hasClass = function(el,classname) {
 };
 
 /**
+ * @param {HTMLElement} el The target html element
+ * @param {String} id The id to set
+ * @return {String} the id
+ */
+jab.dom.id = function(el,id) {
+    if (typeof id != 'undefined') {
+        el.id = id
+    }
+    return el.id;
+};
+
+/**
  * Add a class to dom element
  * @param {HTMLElement} el The target HTMLELement
  * @param {String} classname The css class to add to element

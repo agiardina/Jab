@@ -1,41 +1,79 @@
 jab.html.Element = function() {
     var element = new jab.MVPObject(),
-        dom = ['hasClass','addClass','removeClass','width', 'height'];
+        dom = ['hasClass','addClass','removeClass','width', 'height','id'];
 
-    element._element = 'div';
-    element._className = '';
+    element.constructor = function(elementType,className,id) {
+        if (elementType) {
+            this.init.apply(this,arguments);
+        }
+        return this;
+    };
 
-    element.constructor = function() {
-        this._node = undefined;
-    }
-
-    element.init = function(className,id) {
+    element.init = function(elementType,className,id) {
         if (typeof this._node == 'object') {
             throw "Element.init: impossibile to init more than one node";
         } else {
-            this._node = document.createElement(this._element);
-            this._node.className = className;
-
-            this.style = this._node.style;
-
-            if (typeof id != 'undefined') {
-                this._node.id = id
-            }
+            var node = document.createElement(elementType);
+            this.load(node);
 
             //Every element can have a default className
-            this.addClass(this._className);
+            this.addClass(className);
+            this.id(id);
+
+            node = null;
         }
         return this;
-    },
+    };
 
     element.load = function(node) {
-       this._node = node;
-       return this;
-    }
+        this._node = node;
+        return this;
+    };
 
     element.node = function() {
-        return this._node;
-    }
+        if (typeof this._node.node == 'function') {
+            return this._node.node();
+        } else {
+            return this._node;
+        }
+    };
+
+    element.clear = function() {
+        var node = this.node();
+        while(node.firstChild) {
+           node.removeChild(node.firstChild);
+        }
+        node = null;
+    };
+
+    element.appendTo = function(target) {
+        try {
+            if (typeof target.node == 'function') {
+                target.node().appendChild(this.node());
+            } else {
+                target.appendChild(this.node());
+            }
+        } catch (err){
+            throw 'Widget.appendTo: Impossible to append to object';
+        }
+
+        return this;
+    };
+
+    element.appendChild = function(child) {
+        try {
+            if (typeof child.node == 'function') {
+                this.node().appendChild(child.node());
+            } else {
+                this.node().appendChild(child);
+            }
+            
+        } catch (err){
+            throw 'Widget.appendTo: Impossible to append to object';
+        }
+
+        return this;
+    };
 
     /**
      * Return the events manager and load it if necessary

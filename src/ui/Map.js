@@ -1,8 +1,12 @@
 jab.ui.Map = function() {
-    var map = new jab.ui.Widget();
+    var map = new jab.html.Element();
 
-    map.constructor = function(){
+    map.constructor = function(name){
         this._markers = {};
+        if (name) {
+            this.init('div','map');
+            this.addClass(name);
+        }
     };
 
     map.init = function() {
@@ -115,6 +119,13 @@ jab.ui.Map = function() {
         }
 
         return this;
+    };
+
+    map.free = function() {
+        for (id in this._markers) {
+            this._markers[id].setMap(null);
+            delete this._markers[id];
+        }
     };
     
     /**

@@ -1,14 +1,14 @@
 jab.ui.Layout = function() {
-    var layout = new jab.ui.Widget();
     
-    layout.constructor = function(node) {
+    var layout = new jab.html.Element();
+    
+    layout.constructor = function(name) {
         this._panels = {};
+        if (name) {
+            this.init('div','layout');
+            this.addClass(name);
+        }
     };
-
-    layout.init = function() {
-        jab.html.Element.prototype.init.apply(this,arguments);
-        return this;
-    },
 
     layout.orientation = function(val) {
         if (val == 'horizontal') {
@@ -65,9 +65,8 @@ jab.ui.Layout = function() {
     layout.panels = function(panels) {
         var len=panels.length;
         for (var i=0;i<len;i++) {
-            var panel = new jab.ui.Layout(),
-                name = panels[i];
-            panel.init(name);
+            var name = panels[i],
+                panel = new jab.ui.Layout(name);
             this._panels[name] = panel;
             this.node().appendChild(panel.node());
         }

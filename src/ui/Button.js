@@ -1,9 +1,12 @@
 jab.ui.Button = function() {
 
-    var button = new jab.ui.Widget();
+    var button = new jab.html.Element();
 
-    button.constructor = function() {
-        this._className = 'button';
+    button.constructor = function(name) {
+        if (name) {
+            this.init('div','button');
+            this.addClass(name);
+        }
     };
 
     /**
