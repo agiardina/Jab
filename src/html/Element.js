@@ -4,7 +4,7 @@ jab.html.Element = function() {
 
     element.constructor = function(elementType,className,id) {
         if (elementType) {
-            this.init.apply(this,arguments);
+            this.init(elementType,className,id);
         }
         return this;
     };
@@ -73,6 +73,62 @@ jab.html.Element = function() {
         }
 
         return this;
+    };
+
+    element.scrollable = function() {
+        var self = this;
+
+        this.addClass('scrollable');
+
+        this.on('touchstart',function(_,e){
+            if (typeof self._touch == 'undefined') {
+                self._touch = {x:0,y:0};
+            }
+            
+            self._touch.startTime = new Date().getTime();
+            self._touch.startX = e.targetTouches[0].clientX;
+            self._touch.startY = e.targetTouches[0].clientY;
+            self._touch.currY = self._touch.startY;
+            self._touch.currX = self._touch.startX;
+
+            self._touch.page = jab.dom.height(self.node().parentNode);
+            self._touch.max = self.height() - self._touch.page;
+           
+        });
+        
+        this.on('touchmove',function(_,e) {
+
+            self._touch.currY = e.targetTouches[0].clientY;
+            
+            var diff = e.targetTouches[0].clientY - self._touch.startY;
+
+            self._touch.y = self._touch.y + diff;
+
+            if (self._touch.y > 0) self._touch.y = 0;
+            if (self._touch.y < -self._touch.max) self._touch.y = -self._touch.max;
+
+            self.node().style.webkitTransform = 'translateY('+self._touch.y+'px)';
+        });
+
+        this.on('touchend',function(_,e) {
+            var msec = new Date().getTime() - this._touch.startTime,
+                diffY = self._touch.currY - self._touch.startY,
+                speed;
+
+            if (diffY && msec) {
+                speed =  Math.abs(diffY)/msec;
+                
+                if (speed > 0.5 && speed < 5 ) {
+                    
+                    self._touch.y = self._touch.y - diffY + (diffY * (speed * speed * 7));
+
+                    if (self._touch.y > 0) self._touch.y = 0;
+                    if (self._touch.y < -self._touch.max) self._touch.y = -self._touch.max;
+                    self.node().style.webkitTransform = 'translateY('+self._touch.y+'px)';
+                }
+                
+            }
+        });
     };
 
     /**
