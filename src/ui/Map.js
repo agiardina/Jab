@@ -9,6 +9,24 @@ jab.ui.Map = function() {
         }
     };
 
+    map.load = function() {
+        jab.html.Element.prototype.load.apply(this,arguments);
+        
+        var self = this;
+        this.node().addEventListener('DOMNodeRemovedFromDocument', function() {
+            self.free();
+            delete this._map;
+        });
+
+        this.node().addEventListener('DOMNodeInsertedIntoDocument', function() {
+            setTimeout(function(){
+                self.checkResize();
+                self._map.setCenter(self._center);
+            },100);
+        });
+
+    };
+
     map.init = function() {
         jab.html.Element.prototype.init.apply(this,arguments);
         this.addClass('map');
@@ -17,15 +35,19 @@ jab.ui.Map = function() {
     
     map.show = function (lat, lng) {
         var latlng = new google.maps.LatLng(lat, lng),
+            zoom = 12,
             options = {
-                zoom: 12,
+                zoom: zoom,
                 center: latlng,
                 mapTypeControl: false,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 navigationControlOptions: {style: google.maps.NavigationControlStyle.ANDROID},
             };
 
+        this._center = latlng;
+        this._zoom = zoom;
         this._map = new google.maps.Map(this.node(), options);
+
         return this;
     };
 
@@ -123,9 +145,13 @@ jab.ui.Map = function() {
 
     map.free = function() {
         for (id in this._markers) {
+            google.maps.event.clearInstanceListeners(this._markers[id]);
             this._markers[id].setMap(null);
-            delete this._markers[id];
         }
+        this._markers = {}
+        
+        google.maps.event.clearInstanceListeners(this._map);
+        delete this._map;
     };
     
     /**
@@ -145,6 +171,9 @@ jab.ui.Map = function() {
         return this;
     };
 
+    map.checkResize = function() {
+        google.maps.event.trigger(this._map, 'resize');
+    };
 
 
     map.constructor.prototype = map;
