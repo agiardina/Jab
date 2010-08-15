@@ -52,14 +52,16 @@ jab.dom.id = function(el,id) {
  * @return {Function} Return the jab.dom function to allow chaininig
  */
 jab.dom.addClass = function(el,classname) {
-    if (jab.dom.hasClass(el, classname)) {
-        return jab.dom;
-    }
+    if (classname) {
+        if (jab.dom.hasClass(el, classname)) {
+            return jab.dom;
+        }
 
-    if (el.className.length) {
-        el.className = el.className + ' ' + classname ;
-    } else {
-        el.className = classname;
+        if (el.className.length) {
+            el.className = el.className + ' ' + classname ;
+        } else {
+            el.className = classname;
+        }
     }
     
     return jab.dom;
@@ -99,12 +101,28 @@ jab.dom.width = function(el,width) {
  * Define the height of an HTMLElement
  * @param {HTMLElement} el The target HTMLElement
  * @param {Number} height The height in pixels to set
- * @return {Function} Return the jab.dom function to allow chaining
+ * @return {Function|Number} Return the jab.dom function to allow chaining
+ * or the client
  */
 jab.dom.height = function(el,height) {
-    if (parseInt(height) == height) {
-        height = height + "px";
+    if (typeof height != 'undefined') {
+        if (parseInt(height) == height) {
+            height = height + "px";
+        }
+
+        el.style.height = height;
+        return jab.dom;
+    } else {
+        return el.offsetHeight;
     }
-    el.style.height = height;
-    return jab.dom;
+};
+
+/**
+ * Return the body element wrapped in the jab.html.Element type
+ * @see Element
+ * @return {Element}
+ */
+jab.dom.getBody = function() {
+    var el = new jab.html.Element();
+    return el.load(document.getElementsByTagName('body')[0]);
 };
