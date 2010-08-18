@@ -14,7 +14,33 @@ jab.MVPObject = function() {
      */
     mvpobject.on = function(evName,listener) {
         this.events().addEventListener(evName,listener);
+        return this;
+        /*
+        var events = {};
+        
+        this.on = function(evName,listener) {
+            if (typeof events[evName] == 'undefined') {
+                events[evName] = new jab.Event();
+            }
+
+            if (typeof listener == 'function') {
+                var self = this;
+                events[evName].addListener(listener);
+                this.node().addEventListener(evName, function(e) {
+                    self.on(evName).fire(e);
+                });
+            }
+            return events[evName];
+        }
+        return this.on(evName,listener);*/
     };
+
+    mvpobject.destroy = function() {
+        for (var p in this) {
+            delete this[p];
+        }
+        this.__proto__ = null;
+    }
 
     /**
      * Return the events manager and load it if necessary
@@ -29,7 +55,7 @@ jab.MVPObject = function() {
         }
         return this.events();
             
-    };    
+    };
 
     mvpobject.constructor.prototype = mvpobject;
 

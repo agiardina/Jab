@@ -12,7 +12,7 @@ jab.DomEventsManager = function() {
             var self = this;
             self._target.node().addEventListener(evName, function(e) {
                 self.fireEvent(evName,e);
-            });
+            },false);
         }
     };
 

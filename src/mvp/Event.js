@@ -37,7 +37,7 @@ jab.Event = function() {
     };
 
     /**
-     * The Event constructor. It just initialize the listener array
+     * The Event constructor. It just initializes the listener array
      */
     event.constructor = function() {
         this._listeners = [];

@@ -1,4 +1,5 @@
 jab.ui.Map = function() {
+    
     var map = new jab.html.Element();
 
     map.constructor = function(name){
@@ -15,15 +16,14 @@ jab.ui.Map = function() {
         var self = this;
         this.node().addEventListener('DOMNodeRemovedFromDocument', function() {
             self.free();
-            delete this._map;
-        });
+        },false);
 
         this.node().addEventListener('DOMNodeInsertedIntoDocument', function() {
             setTimeout(function(){
                 self.checkResize();
                 self._map.setCenter(self._center);
             },100);
-        });
+        },false);
 
     };
 
@@ -86,7 +86,7 @@ jab.ui.Map = function() {
                  position: markerLatLng,
                  map: this._map
              },
-             marker
+             marker,
              self = this;
 
         //Add more default options
@@ -103,7 +103,7 @@ jab.ui.Map = function() {
 
         //Create a wrapper for the listener
         google.maps.event.addListener(marker, 'click', function() {
-            self.events().fireEvent('markerClick',marker);
+            //self.events().fireEvent('markerClick',marker);
         });
          
         if (typeof id != 'undefined') {
@@ -145,13 +145,12 @@ jab.ui.Map = function() {
 
     map.free = function() {
         for (id in this._markers) {
+            google.maps.event.clearInstanceListeners(this._map);
             google.maps.event.clearInstanceListeners(this._markers[id]);
             this._markers[id].setMap(null);
         }
         this._markers = {}
-        
         google.maps.event.clearInstanceListeners(this._map);
-        delete this._map;
     };
     
     /**

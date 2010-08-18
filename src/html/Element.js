@@ -6,7 +6,6 @@ jab.html.Element = function() {
         if (elementType) {
             this.init(elementType,className,id);
         }
-        return this;
     };
 
     element.init = function(elementType,className,id) {
@@ -44,6 +43,10 @@ jab.html.Element = function() {
            node.removeChild(node.firstChild);
         }
         node = null;
+    };
+
+    element.content = function (text) {
+        this.node().textContent = text;
     };
 
     element.appendTo = function(target) {
@@ -95,12 +98,12 @@ jab.html.Element = function() {
             self._touch.max = self.height() - self._touch.page;
            
         });
-        
-        this.on('touchmove',function(_,e) {
 
-            self._touch.currY = e.targetTouches[0].clientY;
+        this.on('touchmove',function(_,e) {
+            var diff;
             
-            var diff = e.targetTouches[0].clientY - self._touch.startY;
+            diff = e.targetTouches[0].clientY - self._touch.currY;
+            self._touch.currY = e.targetTouches[0].clientY;
 
             self._touch.y = self._touch.y + diff;
 
@@ -112,19 +115,19 @@ jab.html.Element = function() {
 
         this.on('touchend',function(_,e) {
             var msec = new Date().getTime() - this._touch.startTime,
-                diffY = self._touch.currY - self._touch.startY,
+                diff = self._touch.currY - self._touch.startY,
                 speed;
 
-            if (diffY && msec) {
-                speed =  Math.abs(diffY)/msec;
+            if (diff && msec) {
+                speed =  Math.abs(diff)/msec;
                 
-                if (speed > 0.5 && speed < 5 ) {
+                if (speed > 0.3 && speed < 5 ) {
                     
-                    self._touch.y = self._touch.y - diffY + (diffY * (speed * speed * 7));
+                    //self._touch.y = self._touch.y + (diffY * (speed * speed * 7));
 
                     if (self._touch.y > 0) self._touch.y = 0;
                     if (self._touch.y < -self._touch.max) self._touch.y = -self._touch.max;
-                    self.node().style.webkitTransform = 'translateY('+self._touch.y+'px)';
+                    //self.node().style.webkitTransform = 'translateY('+self._touch.y+'px)';
                 }
                 
             }
@@ -135,9 +138,15 @@ jab.html.Element = function() {
      * Return the events manager and load it if necessary
      * @return {jab.DomEventsManager}
      */
-    element.events = function() {
+    element.events = function(eventManager) {
+        var events;
         //Lazy loading of events manager
-        var events = new jab.DomEventsManager(this);
+        if (typeof eventManager == 'undefined') {
+            events = new jab.DomEventsManager(this);
+        } else {
+            events = eventManager;
+        }
+        
         //Replace the events function
         this.events = function() {
             return events;
