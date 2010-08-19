@@ -1,6 +1,6 @@
 jab.html.Element = function() {
     var element = new jab.MVPObject(),
-        dom = ['hasClass','addClass','removeClass','width', 'height','id'];
+        dom = ['hasClass','addClass','removeClass','width', 'height','id','attr'];
 
     element.constructor = function(elementType,className,id) {
         if (elementType) {
@@ -162,7 +162,15 @@ jab.html.Element = function() {
         var fn = dom[i];
         element[fn] = function(f) {
             return function() {
-                var res = jab.dom[f](this._node,arguments[0]);
+                var args = [],
+                    res;
+                    
+                args[0] = this._node;
+                for (var i = 0,len = arguments.length;i<len;i++) {
+                    args[i+1] = arguments[i];
+                }
+
+                res = jab.dom[f].apply(null,args);
                 if (res == jab.dom) {
                     return this;
                 } else {
