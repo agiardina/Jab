@@ -53,7 +53,19 @@ var testDom = {
         jab.dom.removeClass(this._test,'test');
         jab.dom.removeClass(this._test,'test2');
         Y.Assert.areEqual("",this._test.getAttribute('class').trim());
-    }
+    },
+
+    testId: function() {
+        Y.Assert.isTrue(false);
+    },
+
+    getBody: function() {
+        Y.Assert.isTrue(false);
+    },
+
+    attr: function() {
+      Y.Assert.isTrue(false);
+    },
 
 }
 
