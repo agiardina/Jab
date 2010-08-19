@@ -98,6 +98,23 @@ jab.dom.width = function(el,width) {
 };
 
 /**
+ * Set/Get an attribute of an element
+ * @param {HTMLElement} el The target HTMLElement
+ * @param {String} attr The attribute to set
+ * @param {String} val The value of the attribute
+ * @return {String|Function) 
+ */
+jab.dom.attr = function(el,attr,val) {
+    if (typeof val == 'undefined') {
+        return el.getAttribute(attr);
+    } else {
+        el.setAttribute(attr,val)
+        return jab.dom;
+    }
+
+};
+
+/**
  * Define the height of an HTMLElement
  * @param {HTMLElement} el The target HTMLElement
  * @param {Number} height The height in pixels to set
