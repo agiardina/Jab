@@ -93,8 +93,8 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 .scrollable {
     position:relative;
     -webkit-transition-property: -webkit-transform;
-    -webkit-transition-duration: 950ms;
-    -webkit-transition-timing-function: cubic-bezier(0.2, 0, 0.2, 1.0);
+    -webkit-transition-duration: 1550ms;
+    -webkit-transition-timing-function: edge-out;
 }
 
 
@@ -120,12 +120,6 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 
 .in {
     -webkit-animation-name: slideinfromright;
-}
-
-.scrollY {
-    -webkit-animation-name: scrollY;
-    -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-duration: 650ms;
 }
 
 @-webkit-keyframes slideinfromright {
