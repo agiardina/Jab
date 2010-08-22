@@ -13,7 +13,7 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     float:right;
 }
 
-.horizontal.p1 > div { width:100%}
+/*.horizontal.p1 > div { width:100%}
 .horizontal.p2 > div { width:50%}
 .horizontal.p3 > div { width:33%}
 .horizontal.p3 > div:last-child { width:34%}
@@ -26,13 +26,23 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 .p3 > div:last-child { height:34%}
 .p4 > div { height:25%;}
 .p5 > div { height:20%;}
+*/
 
+.vertical {
+    display:-webkit-box;
+    -webkit-box-orient: vertical;
+}
 
+.horizontal {
+    display:-webkit-box;
+    -webkit-box-orient: horizontal;
+}
 
 .horizontal > div,
 .horizontal > div:last-child  {
-    display:inline-block;
-    height:100%;
+    -webkit-box-flex:1;
+    /*display:inline-table;
+    height:100%;*/
 }
 
 .layout {
@@ -61,7 +71,7 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     height:100%;
 }
 
-.abutton {
+.button.white {
     overflow: hidden;
     margin: 5px;
     padding: 0 3px;
@@ -104,13 +114,16 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     display:block;
     margin:0;
     padding:0;
+    background:#222;
+    color:white;
+    min-height: 100%;
 }
 
 .list li {
     display:block;
-    height:50px;
-    display:block;
-    border:1px solid black;
+    border-width:1px;
+    padding:5px;
+    -webkit-border-image: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(40%,#999),color-stop(60%,#999)) 0 0 100% 0;
 }
 
 .in, .out {
@@ -162,3 +175,9 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 .active .icon {background: -webkit-gradient(linear, 38% 0%, 60% 70%, from(#dde9f0), to(#3fc5f8), color-stop(.6,#79b2ec),color-stop(.7,#2e91e5))}
 .chat {-webkit-mask-box-image: url(/Jab/img/icons/chat.png)}
 .chat2 {-webkit-mask-box-image: url(/Jab/img/icons/chat2.png)}
+
+.textarea {
+    border:4px solid #ccc;
+    display:table;
+    -webkit-border-radius:4px;;
+}
