@@ -1,6 +1,6 @@
 jab.html.Element = function() {
     var element = new jab.MVPObject(),
-        dom = ['hasClass','addClass','removeClass','width', 'height','id','attr'];
+        dom = ['hasClass','addClass','removeClass','width', 'height','id','attr', 'hide','show'];
 
     element.constructor = function(elementType,className,id) {
         if (elementType) {
@@ -78,56 +78,61 @@ jab.html.Element = function() {
         return this;
     };
 
+    element.appendBefore = function (refEl) {
+        if (typeof refEl.node == 'function') {
+            refEl =  refEl.node();
+        }
+        refEl.parentNode.insertBefore(this.node(),refEl);
+    };
+
     element.scrollable = function() {
-        var self = this;
+        var self = this,
+            touch = {x:0,y:0},
+            scroll = function(diff,e) {
+                touch.currY = e.targetTouches[0].clientY;
+                touch.y = touch.y + diff;
+
+                if (touch.y > 0) touch.y = 0;
+                if (touch.y < -touch.max) touch.y = -touch.max;
+
+                self.node().style.webkitTransform = 'translateY('+touch.y+'px)';
+            };
 
         this.addClass('scrollable');
 
         this.on('touchstart',function(_,e){
-            if (typeof self._touch == 'undefined') {
-                self._touch = {x:0,y:0};
-            }
             
-            self._touch.startTime = new Date().getTime();
-            self._touch.startX = e.targetTouches[0].clientX;
-            self._touch.startY = e.targetTouches[0].clientY;
-            self._touch.currY = self._touch.startY;
-            self._touch.currX = self._touch.startX;
+            touch.startTime = new Date().getTime();
 
-            self._touch.page = jab.dom.height(self.node().parentNode);
-            self._touch.max = self.height() - self._touch.page;
+            touch.startY = e.targetTouches[0].clientY;
+            touch.currY = touch.startY;
+
+            touch.page = jab.dom.height(self.node().parentNode);
+            touch.max = self.height() - touch.page;
            
         });
 
         this.on('touchmove',function(_,e) {
             var diff;
             
-            diff = e.targetTouches[0].clientY - self._touch.currY;
-            self._touch.currY = e.targetTouches[0].clientY;
-
-            self._touch.y = self._touch.y + diff;
-
-            if (self._touch.y > 0) self._touch.y = 0;
-            if (self._touch.y < -self._touch.max) self._touch.y = -self._touch.max;
-
-            self.node().style.webkitTransform = 'translateY('+self._touch.y+'px)';
+            //diff = e.targetTouches[0].clientY - self._touch.currY; //Slow
+            diff = e.targetTouches[0].clientY - touch.startY; //Faster on border
+            scroll(diff,e);
         });
 
         this.on('touchend',function(_,e) {
-            var msec = new Date().getTime() - this._touch.startTime,
-                diff = self._touch.currY - self._touch.startY,
+            var msec = new Date().getTime() - touch.startTime,
+                moved = touch.currY - touch.startY,
+                diff = e.targetTouches[0].clientY - touch.startY,
                 speed;
 
             if (diff && msec) {
                 speed =  Math.abs(diff)/msec;
-                
-                if (speed > 0.3 && speed < 5 ) {
+                if (speed > 0.3 ) {
                     
-                    //self._touch.y = self._touch.y + (diffY * (speed * speed * 7));
-
-                    if (self._touch.y > 0) self._touch.y = 0;
-                    if (self._touch.y < -self._touch.max) self._touch.y = -self._touch.max;
-                    //self.node().style.webkitTransform = 'translateY('+self._touch.y+'px)';
+                    diff > 0 ? diff = touch.page : diff = -touch.page;
+                    //diff = diff - moved;
+                    scroll(diff,e);
                 }
                 
             }
