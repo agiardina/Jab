@@ -59,7 +59,7 @@ jab.init = function(basepath) {
         "/src/dom.js",
         "/src/mvp/MVPObject.js",
         "/src/html/Element.js",
-        "/src/html/Struct.js",
+        "/src/html/Tree.js",
         "/src/mvp/Event.js",
         "/src/mvp/EventsManager.js",
         "/src/mvp/DomEventsManager.js",
@@ -71,6 +71,7 @@ jab.init = function(basepath) {
         "/src/ui/List.js",
         "/src/ui/Map.js",
         "/src/ui/Button.js",
+        "/src/ui/Textarea.js",
     ],basepath);
 };
 

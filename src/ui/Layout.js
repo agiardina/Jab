@@ -50,9 +50,14 @@ jab.ui.Layout = function() {
      */
     layout.panelsHeight = function(height) {
         if (height instanceof Array) {
-            var i = 0;
+            var i = 0,h;
             for (var p in this._panels) {
-                this._panels[p].height(height[i++]);
+                h = height[i++];
+                if (h == 'flex' || h == 'auto' ) {
+                    this._panels[p].node().style['-webkit-box-flex'] = 1;
+                } else {
+                    this._panels[p].height(h);
+                }
             }
         } else {
             for (var p in height) {

@@ -145,12 +145,10 @@ jab.ui.Map = function() {
 
     map.free = function() {
         for (id in this._markers) {
-            google.maps.event.clearInstanceListeners(this._map);
             google.maps.event.clearInstanceListeners(this._markers[id]);
             this._markers[id].setMap(null);
         }
         this._markers = {}
-        google.maps.event.clearInstanceListeners(this._map);
     };
     
     /**
