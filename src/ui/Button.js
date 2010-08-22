@@ -13,9 +13,34 @@ jab.ui.Button = function() {
      * @param {String} label the label for the button
      */
     button.label = function(label) {
-        this.node().innerHTML = "<span>" + label + "</span>";
+        if (!this._label) {
+            this._label = new jab.html.Element('span');
+            this._label.addClass('label');
+            this.appendChild(this._label);
+        }
+        this._label.content(label);
         return this;
     };
+
+    /**
+     * @param {String} icon The icon to set
+     */
+    button.icon = function(icon) {
+        if (!this._icon) {
+            this._icon = new jab.html.Element('span');
+            if (this._label) {
+                this._icon.appendBefore(this._label)
+            } else {
+                this.appendChild(this._icon);
+            }
+        }
+        this._icon.attr('class','icon');
+        this._icon.addClass(icon);
+
+
+        return this;
+    };
+    
 
     button.constructor.prototype = button;
 
