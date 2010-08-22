@@ -134,6 +134,25 @@ jab.dom.height = function(el,height) {
     }
 };
 
+
+/**
+ * Hide an element
+ * @param {HTMLElement} el The target HTMLElement
+ */
+jab.dom.hide = function(el) {
+    jab.dom.addClass(el,'hide');
+};
+
+
+/**
+ * Show an element
+ * @param {HTMLElement} el The target HTMLElement
+ *
+ */
+jab.dom.show = function(el) {
+    jab.dom.removeClass(el,'hide');
+};
+
 /**
  * Return the body element wrapped in the jab.html.Element type
  * @see Element
