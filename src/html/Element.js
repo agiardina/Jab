@@ -1,6 +1,8 @@
 jab.html.Element = function() {
     var element = new jab.MVPObject(),
-        dom = ['hasClass','addClass','removeClass','width', 'height','id','attr', 'hide','show'];
+        dom = ['hasClass','addClass','removeClass','style',
+               'width', 'height','id','attr',
+               'hide','show','focus'];
 
     element.constructor = function(elementType,className,id) {
         if (elementType) {

@@ -84,6 +84,18 @@ jab.dom.removeClass = function(el,classname) {
 };
 
 /**
+ * Set a style property
+ * @param {HTMLElement} el The target HTMLElement
+ * @param {String} prop The property to set
+ * @param {String} val The value of the property
+ * @return {Function} the jab.dom function to allow chaining
+ */
+jab.dom.style = function(el,prop,val) {
+    el.style[prop] = val;
+    return jab.dom;
+};
+
+/**
  * Define the width of an HTMLElement
  * @param {HTMLElement} el The target HTMLElement
  * @param {Number} width The width in pixels to set
@@ -138,19 +150,29 @@ jab.dom.height = function(el,height) {
 /**
  * Hide an element
  * @param {HTMLElement} el The target HTMLElement
+ * @return {Function} The jab.dom function to allow chaining
  */
 jab.dom.hide = function(el) {
-    jab.dom.addClass(el,'hide');
+    return jab.dom.addClass(el,'hide');
 };
 
 
 /**
  * Show an element
  * @param {HTMLElement} el The target HTMLElement
- *
+ * @return {Function} The jab.dom function to allow chaining
  */
 jab.dom.show = function(el) {
-    jab.dom.removeClass(el,'hide');
+    return jab.dom.removeClass(el,'hide');
+};
+
+/**
+ * @param {HTMLElement} el The target HTMLElement
+ * @return {Function} The jab.dom function to allow chaining
+ */
+jab.dom.focus = function(el) {
+    el.focus();
+    return jab.dom;
 };
 
 /**
