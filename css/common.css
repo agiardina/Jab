@@ -178,6 +178,7 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 
 .textarea {
     border:4px solid #ccc;
-    display:table;
-    -webkit-border-radius:4px;;
+    -webkit-border-radius:4px;
+    display:block;
+    -webkit-box-flex:1;
 }

@@ -67,6 +67,10 @@ var testDom = {
       Y.Assert.isTrue(false);
     },
 
+    style: function() {
+      Y.Assert.isTrue(false);
+    },
+
 }
 
 
