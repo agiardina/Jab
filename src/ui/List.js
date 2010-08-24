@@ -8,6 +8,12 @@ jab.ui.List = function() {
         this.appendChild(item);
     };
 
+    list.begin = function(widget) {
+        var item = new jab.html.Element('li');
+        item.appendChild(widget)
+        this.insertFirstChild(item);
+    };
+    
     list.add = function(widget) {
         var item = new jab.html.Element('li');
         item.appendChild(widget)
