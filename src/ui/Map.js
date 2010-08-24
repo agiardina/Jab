@@ -103,7 +103,7 @@ jab.ui.Map = function() {
 
         //Create a wrapper for the listener
         google.maps.event.addListener(marker, 'click', function() {
-            //self.events().fireEvent('markerClick',marker);
+            self.events().fireEvent('markerClick',marker);
         });
          
         if (typeof id != 'undefined') {
@@ -112,6 +112,41 @@ jab.ui.Map = function() {
         }
          
         return marker;
+    };
+
+    /**
+     * Initialize an InfoWindow
+     * @param {jab.html.Element|HTMLElement} el The content of the infoWindow
+     * 
+     */
+    map.loadInfoWindow = function(el) {
+        if (!this._infoWindow) {
+            this._infoWindow = new google.maps.InfoWindow();
+        }
+
+        if (typeof el.node == 'function') {
+            el = el.node();
+        }
+
+        this._infoWindow.setContent(el);
+    };
+
+    /**
+     * Show an infoWindow
+     * @param {google.maps.Marker} marker The optional marker to anchor the text
+     * @param {jab.html.Element|HTMLElement|String} el The optional content element
+     * @see #loadInfoWindow
+     */
+    map.showInfoWindow = function (marker,el) {
+        if (el) {
+            this.loadInfoWindow(el);
+        }
+
+        if (typeof this._infoWindow == 'undefined') {
+            throw "Infowindow not loaded";
+        }
+
+        this._infoWindow.open(this._map,marker);
     };
 
     /**
@@ -147,6 +182,10 @@ jab.ui.Map = function() {
         for (id in this._markers) {
             google.maps.event.clearInstanceListeners(this._markers[id]);
             this._markers[id].setMap(null);
+        }
+
+        if (this._infoWindow) {
+            this._infoWindow.close();
         }
         this._markers = {}
     };
