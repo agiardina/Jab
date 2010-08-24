@@ -48,7 +48,17 @@ jab.html.Element = function() {
     };
 
     element.content = function (text) {
-        this.node().textContent = text;
+        if (typeof text == 'undefined') {
+            return this.node().textContent;
+        } else {
+            this.node().textContent = text;
+            return this;
+        }
+        
+    };
+
+    element.data = function(prop,value) {
+        return this.attr('data-' + prop,value);
     };
 
     element.appendTo = function(target) {
@@ -75,6 +85,23 @@ jab.html.Element = function() {
             
         } catch (err){
             throw 'Widget.appendTo: Impossible to append to object';
+        }
+
+        return this;
+    };
+
+    element.insertFirstChild = function(child) {
+        var first = this.node().firstChild;
+        
+        try {
+            if (typeof child.node == 'function') {
+                this.node().insertBefore(child.node(),first);
+            } else {
+                this.node().insertBefore(child, first);
+            }
+
+        } catch (err){
+            throw 'Widget.appendTo: Impossible insert into object';
         }
 
         return this;
@@ -160,7 +187,8 @@ jab.html.Element = function() {
         }
         return this.events();
 
-    };    
+    };
+
 
     /**
      * Copy methods from jab.dom
