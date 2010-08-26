@@ -11,4 +11,3 @@ jab.ui.Textarea = function() {
     txt.constructor.prototype = txt;
     return txt.constructor;
 }();
-

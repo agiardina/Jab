@@ -3,13 +3,13 @@ jab.Rpc = function() {
 
     /**
      * @param {String} url The url, or the name, of the command to call
-     * @return {jab.Rpccommand} the command
+     * @return {jab.RpcCommand} the command
      */
     rpc.command = function(url) {
-        
+        return new jab.RpcCommand(this,url);
     };
 
-    rpc.call = function(command) {
+    rpc.run = function(command) {
         var timeout = command.timeout(),
             timeoutId,
             req;
@@ -39,7 +39,9 @@ jab.Rpc = function() {
             },timeout);
         }
 
+
         req.onreadystatechange = function() {
+            
             //Clear Timeout
             if (timeoutId) {
                 clearTimeout(timeoutId);
@@ -47,7 +49,7 @@ jab.Rpc = function() {
 
             if (req.readyState == 4) {
                 if(req.status == 200) {
-                    command.success(req.responseText);
+                    command.success(JSON.parse(req.responseText));
                 } else {
                     command.error(req.status);
                 }

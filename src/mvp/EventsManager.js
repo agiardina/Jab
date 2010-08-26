@@ -68,6 +68,7 @@ jab.EventsManager = function(){
         event.target = this._target;
         return event.fire(data);
     };
+    manager.fire = manager.fireEvent; //Alias for fireEvent
 
     /**
      * The event manager constructor;

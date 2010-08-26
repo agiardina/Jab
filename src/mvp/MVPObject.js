@@ -13,34 +13,19 @@ jab.MVPObject = function() {
      * @return this For chaining
      */
     mvpobject.on = function(evName,listener) {
-        this.events().addEventListener(evName,listener);
-        return this;
-        /*
-        var events = {};
-        
-        this.on = function(evName,listener) {
-            if (typeof events[evName] == 'undefined') {
-                events[evName] = new jab.Event();
-            }
-
-            if (typeof listener == 'function') {
-                var self = this;
-                events[evName].addListener(listener);
-                this.node().addEventListener(evName, function(e) {
-                    self.on(evName).fire(e);
-                });
-            }
-            return events[evName];
+        if (listener) {
+            this.events().addEventListener(evName,listener);
+            return this;
+        } else {
+            var ev = this.events().get(evName);
+            ev.target = this;
+            return ev;
         }
-        return this.on(evName,listener);*/
     };
 
-    mvpobject.destroy = function() {
-        for (var p in this) {
-            delete this[p];
-        }
-        this.__proto__ = null;
-    }
+    mvpobject.fireEvent = function(ev,data) {
+        return this.events().fire(ev,data);
+    };
 
     /**
      * Return the events manager and load it if necessary
