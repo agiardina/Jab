@@ -3,6 +3,7 @@ jab.AppController = function() {
 
     appController.views = {};
     appController.presenters = {};
+    appController.widgets = {};
 
 
     appController.constructor = function() {};

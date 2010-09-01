@@ -74,6 +74,7 @@ jab.init = function(basepath) {
         "/src/ui/List.js",
         "/src/ui/Map.js",
         "/src/ui/Button.js",
+        "/src/ui/Textfield.js",
         "/src/ui/Textarea.js",
     ],basepath);
 };

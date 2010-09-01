@@ -2,13 +2,13 @@ jab.html.Tree = function() {
     var st = new jab.html.Element();
 
     st.constructor = function(data) {
-        this._tree = {};
         if (data) {
             this.create(data);
         }
     };
 
     st.create = function(data) {
+        this._tree = {};
         this.load(new jab.html.Element('div'));
         this._create(data,this._tree,this);
     };
@@ -16,12 +16,19 @@ jab.html.Tree = function() {
     st._create = function(data,tree,node) {
         tree._el = node;
         for (var p in data) {
+            if (p == '__type__') continue;
+            
             tree[p] = {};
             if (typeof data[p] == 'object') {
-                tree[p] = this._create(data[p],{},new jab.html.Element('div'));
-            } else {
+                if (data[p].__type__) {
+                    tree[p] = this._create(data[p],{},new jab.html.Element(data[p].__type__));
+                } else{
+                    tree[p] = this._create(data[p],{},new jab.html.Element('div'));
+                }
+                
+            } else  {
                 tree[p]._el = new jab.html.Element(data[p]);
-            }
+            } 
             tree[p]._el.addClass(p).appendTo(node);
         }
         return tree;

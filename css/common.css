@@ -13,24 +13,11 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     float:right;
 }
 
-/*.horizontal.p1 > div { width:100%}
-.horizontal.p2 > div { width:50%}
-.horizontal.p3 > div { width:33%}
-.horizontal.p3 > div:last-child { width:34%}
-.horizontal.p4 > div { width:25%}
-.horizontal.p5 > div { width:20%}
-
-.p1 > div { height:100%;}
-.p2 > div { height:50%;}
-.p3 > div { height:33%;}
-.p3 > div:last-child { height:34%}
-.p4 > div { height:25%;}
-.p5 > div { height:20%;}
-*/
-
 .vertical {
+    height:100%;
     display:-webkit-box;
     -webkit-box-orient: vertical;
+    -webkit-box-align:stretch;
 }
 
 .horizontal {
@@ -38,11 +25,10 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     -webkit-box-orient: horizontal;
 }
 
+
 .horizontal > div,
 .horizontal > div:last-child  {
     -webkit-box-flex:1;
-    /*display:inline-table;
-    height:100%;*/
 }
 
 .layout {
@@ -58,15 +44,14 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     background:url('../img/toolbar.png') repeat-x;
 }
 
-.footer {
-    background:green;
-}
+.footer {}
 
 .body {
     background:violet;
 }
 
 .map {
+    display:block;
     width:100%;
     height:100%;
 }
@@ -90,6 +75,28 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     border-width: 0 12px;
     -webkit-border-image: url(../img/whiteButton.png) 0 12 0 12;
     text-shadow: rgba(255, 255, 255, 0.7) 0 1px 0;
+    cursor: pointer;
+}
+
+.button.black {
+    overflow: hidden;
+    margin: 5px;
+    padding: 0 3px;
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #fff;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    white-space: nowrap;
+    background: none;
+    text-align: center;
+    border-width: 0 12px;
+    -webkit-border-image: url(../img/blackButton.png) 0 11 0 11;
+    text-shadow: rgba(0, 0, 0, 0.3) -2px -2px 0;
     cursor: pointer;
 }
 
@@ -175,10 +182,30 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 .active .icon {background: -webkit-gradient(linear, 38% 0%, 60% 70%, from(#dde9f0), to(#3fc5f8), color-stop(.6,#79b2ec),color-stop(.7,#2e91e5))}
 .chat {-webkit-mask-box-image: url(/Jab/img/icons/chat.png)}
 .chat2 {-webkit-mask-box-image: url(/Jab/img/icons/chat2.png)}
+.radar {-webkit-mask-box-image: url(/Jab/img/icons/compass.png)}
+.id-card {-webkit-mask-box-image: url(/Jab/img/icons/id-card.png)}
+
 
 .textarea {
     border:4px solid #ccc;
     -webkit-border-radius:4px;
     display:block;
     -webkit-box-flex:1;
+}
+
+.field input {
+    border:2px solid #ccc;
+    display:block;
+    font-size:1.2em;
+    -webkit-border-radius:4px;
+}
+
+.field {
+    display:block;
+    
+}
+
+.field span {
+    color:white;
+    display:block;
 }
