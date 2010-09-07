@@ -189,6 +189,15 @@ jab.html.Element = function() {
 
     };
 
+    element.value = function (value) {
+        if (typeof value == 'undefined') {
+            return this.node().value;
+        } else {
+            this.node().value = value
+            return this;
+        }
+    };
+
 
     /**
      * Copy methods from jab.dom
