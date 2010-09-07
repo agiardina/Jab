@@ -31,6 +31,10 @@ jab.prototypeFrom = function (parent,child) {
     return child.prototype;
 }
 
+jab.showError = function(error) {
+    alert(error);
+};
+
 
 /**
  * Load dinamycally a list of javascripts files.

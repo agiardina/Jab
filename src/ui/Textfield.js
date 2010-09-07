@@ -14,6 +14,15 @@ jab.ui.Textfield = function() {
         }
     };
 
+    proto.value = function(value) {
+        if (typeof value == 'undefined') {
+            return this.el('field:input').value();
+        } else {
+            this.el('field:input').value(value);
+            return this;
+        }
+    };
+
     proto.label = function(label) {
         this.el('field:label').content(label);
         return this;
