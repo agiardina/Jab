@@ -51,11 +51,18 @@ jab.ui.Map = function() {
         return this;
     };
 
-    map.autoCenter = function() {
+    map.move = function(lat,lng) {
+
+    };
+
+    map.autoCenter = function(handler) {
         var self = this;
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 self.show(position.coords.latitude,position.coords.longitude);
+                if (typeof handler == 'function') {
+                    handler();
+                }
             }, function() {
                 self.show(10,10);
             });
