@@ -7,7 +7,7 @@ jab.DomEventsManager = function() {
      * @param {Function} handler The event handler
      */
     manager.addEventListener = function(evName,handler) {
-        if (evName == 'touchstart') evName = 'click';
+        if (jab.dev && evName == 'touchstart') evName = 'click'; //Dev environment
         jab.EventsManager.prototype.addEventListener.apply(this,arguments);
         if (this.hasEventListener(evName) == 1) {
             var self = this;
