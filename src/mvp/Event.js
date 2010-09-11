@@ -10,6 +10,11 @@ jab.Event = function() {
      * @return the event for chaining
      */
     event.addListener = function(handler) {
+        for (var i=0,len=this._listeners.length;i<len;i++) {
+            if (this._listeners[i] == handler) {
+                return this;
+            }
+        }
         this._listeners.push(handler);
         return this;
     };

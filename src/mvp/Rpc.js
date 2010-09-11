@@ -1,12 +1,25 @@
 jab.Rpc = function() {
     var rpc = new jab.MVPObject();
 
+    rpc.constructor = function() {
+        this._commands = {};
+    };
     /**
      * @param {String} url The url, or the name, of the command to call
      * @return {jab.RpcCommand} the command
      */
     rpc.command = function(url) {
         return new jab.RpcCommand(this,url);
+    };
+
+    rpc.reuseCommand = function(url,initFn) {
+        if (!this._commands[url]) {
+            this._commands[url] = this.command(url);
+            if (typeof initFn == 'function') {
+                initFn(this._commands[url]);
+            }
+        }
+        return this._commands[url];
     };
 
     rpc.run = function(command) {
@@ -19,7 +32,6 @@ jab.Rpc = function() {
                                                 this._req.readyState != 0)) {
             this._req = new XMLHttpRequest();
         }
-
         req = this._req;
 
         //Open the connection
@@ -46,7 +58,6 @@ jab.Rpc = function() {
             if (timeoutId) {
                 clearTimeout(timeoutId);
             }
-
             if (req.readyState == 4) {
                 if(req.status == 200) {
                     command.success(JSON.parse(req.responseText));
@@ -57,10 +68,6 @@ jab.Rpc = function() {
         }
 
         req.send(command.params());
-    };
-
-    rpc.constructor = function() {
-        
     };
 
     rpc.constructor.prototype = rpc;

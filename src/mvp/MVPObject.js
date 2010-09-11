@@ -42,6 +42,24 @@ jab.MVPObject = function() {
             
     };
 
+    /**
+     * Return a cache object
+     * If a key is specified it returns a global cache object.
+     * Without key it return an instance cache
+     * @param {String} key The optional key to get a global cache object
+     * @return {jab.Cache}
+     */
+    mvpobject.cache = function(key) {
+        if (typeof key == 'string') {
+            return jab.Cache.single(key);
+        } else {
+            if (!this._cache) {
+                this._cache = new jab.Cache();
+            }
+            return this._cache;
+        }
+    };
+
     mvpobject.constructor.prototype = mvpobject;
 
     return mvpobject.constructor;

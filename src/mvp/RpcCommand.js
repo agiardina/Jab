@@ -5,6 +5,7 @@ jab.RpcCommand = function() {
     command._timeout = 5000;
     command._type = 'GET';
     command._params = {};
+    command._usecache = false;
 
     command.rpc = function(rpc) {
         if (rpc) {
@@ -51,7 +52,19 @@ jab.RpcCommand = function() {
         }
     };
 
+    command._cacheKey = function() {
+        return this._url + this._getParams();
+    };
+
+    command.useCache = function(val) {
+        this._usecache = val;
+        return this;
+    };
+
     command.success = function(result) {
+        if (this._usecache) {
+            this.cache(this._usecache).save(this._cacheKey(),result);
+        }
         this.fireEvent('success',result);
     };
 
@@ -61,7 +74,16 @@ jab.RpcCommand = function() {
 
     command.run = function(params) {
         this.params(params);
-        this._rpc.run(this);
+
+        if (this._usecache) {
+            var result = this.cache(this._usecache).get(this._cacheKey());
+        }
+        
+        if (typeof result != 'undefined') {
+            this.fireEvent('success',result);
+        } else {
+            this._rpc.run(this);
+        }
     };
 
     command.runEvery = function(msec,params) {
