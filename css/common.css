@@ -179,6 +179,8 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 }
 
 .icon {width:24px;height:22px;margin-top:2px;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(hsla(0, 100%, 100%, 0.597656)), to(rgba(255, 255, 255, 0.296875)))}
+.icontext {font-size:14px;color:black}
+.notice {color:red;}
 .active .icon {background: -webkit-gradient(linear, 38% 0%, 60% 70%, from(#dde9f0), to(#3fc5f8), color-stop(.6,#79b2ec),color-stop(.7,#2e91e5))}
 .chat {-webkit-mask-box-image: url(/Jab/img/icons/chat.png)}
 .chat2 {-webkit-mask-box-image: url(/Jab/img/icons/chat2.png)}
