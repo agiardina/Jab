@@ -60,7 +60,7 @@ jab.load = function(scripts,basepath) {
 jab.init = function(basepath) {
     jab.load([
         '/src/ext/json2.min.js',
-        //"http://maps.google.com/maps/api/js?sensor=true",
+        "http://maps.google.com/maps/api/js?sensor=true",
         "/src/dom.js",
         "/src/cache/Cache.js",
         "/src/mvp/MVPObject.js",

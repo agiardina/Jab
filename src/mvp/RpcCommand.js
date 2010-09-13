@@ -90,7 +90,7 @@ jab.RpcCommand = function() {
         var self = this,
             func = function() {
                 self.run(params);
-                this._timeout_id = setTimeout(func,msec);
+                self._timeout_id = setTimeout(func,msec);
             };
 
         func();

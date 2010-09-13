@@ -60,7 +60,9 @@ jab.Rpc = function() {
             }
             if (req.readyState == 4) {
                 if(req.status == 200) {
-                    command.success(JSON.parse(req.responseText));
+                    if (req.responseText) {
+                        command.success(JSON.parse(req.responseText));
+                    }
                 } else {
                     command.error(req.status);
                 }

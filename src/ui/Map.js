@@ -16,6 +16,7 @@ jab.ui.Map = function() {
         var self = this;
         this.node().addEventListener('DOMNodeRemovedFromDocument', function() {
             self.free();
+            self.fireEvent('mapInvisible');
         },false);
 
         this.node().addEventListener('DOMNodeInsertedIntoDocument', function() {
@@ -23,6 +24,7 @@ jab.ui.Map = function() {
                 self.checkResize();
                 self._map.setCenter(self._center);
             },100);
+            self.fireEvent('mapVisible');
         },false);
 
     };
@@ -52,19 +54,21 @@ jab.ui.Map = function() {
     };
 
     map.move = function(lat,lng) {
-
+        var latlng = new google.maps.LatLng(lat, lng);
+        this._center = latlng;
+        if (this._map) {
+            this._map.panTo(latlng);
+        }
     };
 
     map.autoCenter = function(handler) {
         var self = this;
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                self.show(position.coords.latitude,position.coords.longitude);
+                self.move(position.coords.latitude,position.coords.longitude);
                 if (typeof handler == 'function') {
                     handler();
                 }
-            }, function() {
-                self.show(10,10);
             });
         }
         return this;
@@ -119,6 +123,27 @@ jab.ui.Map = function() {
         }
          
         return marker;
+    };
+
+    /**
+     * Add a marker to the map or move the marker if exists
+     * @see #marker
+     * @see #addMarker
+     * @see #moveMarker
+     * @param {Number} lat The latitude
+     * @param {Number} lng The longitude
+     * @param {String} title The title
+     * @param {String} icon The icon path if a custom icon is required
+     * @param {String} id An id to memorize the marker somewhere
+     * @return {jab.ui.Map} The map itself for chaining
+     */
+    map.showMarker = function(lat,lng,title,icon,id) {
+        if (this._markers[id]) {
+            console.log('moved');
+            this.moveMarker(id,lat,lng);
+        } else {
+            this.addMarker(lat,lng,title,icon,id);
+        }
     };
 
     /**
@@ -183,6 +208,19 @@ jab.ui.Map = function() {
         }
 
         return this;
+    };
+
+    /**
+     * Return a saved marker
+     * @param {Strimng} id The marker id
+     * @return {google.maps.Marker} the marker
+     */
+    map.getMarker = function(id) {
+        if (typeof this._markers[id] != 'undefined') {
+            return this._markers[id];
+        } else {
+            return null;
+        }
     };
 
     map.free = function() {
