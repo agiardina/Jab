@@ -139,7 +139,6 @@ jab.ui.Map = function() {
      */
     map.showMarker = function(lat,lng,title,icon,id) {
         if (this._markers[id]) {
-            console.log('moved');
             this.moveMarker(id,lat,lng);
         } else {
             this.addMarker(lat,lng,title,icon,id);
