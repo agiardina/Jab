@@ -73,7 +73,9 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     background: none;
     text-align: center;
     border-width: 0 12px;
-    -webkit-border-image: url(../img/whiteButton.png) 0 12 0 12;
+/*    -webkit-border-image: url(../img/whiteButton.png) 0 12 0 12;*/
+    background:#999;
+    border:1px solid #ccc;
     text-shadow: rgba(255, 255, 255, 0.7) 0 1px 0;
     cursor: pointer;
 }
@@ -88,20 +90,21 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     font-size: 14px;
     font-family: sans-serif;
     font-weight: bold;
-    color: #fff;
+    color: orange;
     text-overflow: ellipsis;
     text-decoration: none;
     white-space: nowrap;
     background: none;
     text-align: center;
     border-width: 0 12px;
-    -webkit-border-image: url(../img/blackButton.png) 0 11 0 11;
-    text-shadow: rgba(0, 0, 0, 0.3) -2px -2px 0;
+/*    -webkit-border-image: url(../img/blackButton.png) 0 11 0 11;*/
+    background: #222;
+    border:1px solid #ccc;
+    text-shadow: rgba(255, 255, 255, -0.7) 0 1px 0;
     cursor: pointer;
 }
 
 .button:active {
-    -webkit-border-image: url(../img/toolButton.png) 0 5 0 5;
     color:white;
     text-shadow: rgba(0, 0, 0, 0.7) 0 -1px 0;
 }
@@ -130,7 +133,8 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     display:block;
     border-width:1px;
     padding:5px;
-    -webkit-border-image: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(40%,#999),color-stop(60%,#999)) 0 0 100% 0;
+    border-bottom:1px solid #333;
+/*    -webkit-border-image: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(40%,#999),color-stop(60%,#999)) 0 0 100% 0;*/
 }
 
 .in, .out {
@@ -154,18 +158,22 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 
 
 .toolbar {
-    background:url('../img/bgToolbar.png') repeat-x;
+/*    background:url('../img/bgToolbar.png') repeat-x;*/
+    background:black;
     color:white;
 }
-
+.toolbar>div{
+    margin:4px 2px;
+    aborder:1px solid #666;
+}
 .toolbar .button {
     text-align:center;
     color:#ccc;
-    margin:2px 5px;
-    padding:2px;
+    /*margin:5px 4px;*/
+    padding-top:2px;
     height:43px;
     font: normal normal bold 10px/normal Helvetica, Arial, Verdana, sans-serif;
-    -webkit-border-radius:4px;
+    background:#222;
 }
 
 .toolbar .button span {
@@ -174,14 +182,18 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 }
 
 .toolbar .button.active {
-    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px -1px 0px;background: rgba(255, 255, 255, 0.2);
+/*    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px -1px 0px;background: rgba(255, 255, 255, 0.2);*/
+    background:#666;
+    color:black;
     color:white;
+    -webkit-border-bottom-right-radius:12px;
+    -webkit-border-top-left-radius:12px;
 }
 
 .icon {width:24px;height:22px;margin-top:2px;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(hsla(0, 100%, 100%, 0.597656)), to(rgba(255, 255, 255, 0.296875)))}
 .icontext {font-size:14px;color:black}
 .notice {color:red;}
-.active .icon {background: -webkit-gradient(linear, 38% 0%, 60% 70%, from(#dde9f0), to(#3fc5f8), color-stop(.6,#79b2ec),color-stop(.7,#2e91e5))}
+.active .icon {background: -webkit-gradient(linear, 38% 0%, 60% 70%, from(orange), to(orange))}
 .chat {-webkit-mask-box-image: url(/Jab/img/icons/chat.png)}
 .chat2 {-webkit-mask-box-image: url(/Jab/img/icons/chat2.png)}
 .radar {-webkit-mask-box-image: url(/Jab/img/icons/compass.png)}
