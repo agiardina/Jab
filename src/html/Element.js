@@ -115,6 +115,10 @@ jab.html.Element = function() {
     };
 
     element.scrollable = function() {
+        if (!('ontouchstart' in document.documentElement)) {
+            return;
+        }
+
         var self = this,
             touch = {x:0,y:0},
             scroll = function(diff,e) {
@@ -144,9 +148,11 @@ jab.html.Element = function() {
         this.on('touchmove',function(_,e) {
             var diff;
             
-            //diff = e.targetTouches[0].clientY - self._touch.currY; //Slow
+            //diff = e.targetTouches[0].clientY - touch.currY; //Slow
             diff = e.targetTouches[0].clientY - touch.startY; //Faster on border
             scroll(diff,e);
+
+            touch.currY = e.targetTouches[0].clientY;
         });
 
         this.on('touchend',function(_,e) {
