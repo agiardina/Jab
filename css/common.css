@@ -78,6 +78,7 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     border:1px solid #ccc;
     text-shadow: rgba(255, 255, 255, 0.7) 0 1px 0;
     cursor: pointer;
+    -webkit-border-radius:4px;
 }
 
 .button.black {
@@ -102,19 +103,21 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     border:1px solid #ccc;
     text-shadow: rgba(255, 255, 255, -0.7) 0 1px 0;
     cursor: pointer;
+    -webkit-border-radius:4px;
 }
 
 .button:active {
     color:white;
-    text-shadow: rgba(0, 0, 0, 0.7) 0 -1px 0;
+/*    text-shadow: rgba(0, 0, 0, 0.7) 0 -1px 0;*/
+    background:orange;
 }
 
 /* */
 .scrollable {
     position:relative;
     -webkit-transition-property: -webkit-transform;
-    -webkit-transition-duration: 1550ms;
-    -webkit-transition-timing-function: edge-out;
+    /*-webkit-transition-duration: 1150ms;
+    -webkit-transition-timing-function: edge-out; */
 }
 
 
@@ -161,10 +164,10 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 /*    background:url('../img/bgToolbar.png') repeat-x;*/
     background:black;
     color:white;
+    border-top:2px solid #666;
 }
 .toolbar>div{
-    margin:4px 2px;
-    aborder:1px solid #666;
+    margin:0 2px 4px 2px;
 }
 .toolbar .button {
     text-align:center;
@@ -186,8 +189,9 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     background:#666;
     color:black;
     color:white;
-    -webkit-border-bottom-right-radius:12px;
-    -webkit-border-top-left-radius:12px;
+    -webkit-border-bottom-right-radius:7px;
+    -webkit-border-bottom-left-radius:7px;
+
 }
 
 .icon {width:24px;height:22px;margin-top:2px;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(hsla(0, 100%, 100%, 0.597656)), to(rgba(255, 255, 255, 0.296875)))}
