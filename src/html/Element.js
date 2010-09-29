@@ -119,25 +119,38 @@ jab.html.Element = function() {
             return;
         }
 
+        //Remove the flick event for iphone (move this)
+        document.body.addEventListener("touchmove", function(e) {
+            e.preventDefault();
+        }, false);
+
         var self = this,
             touch = {x:0,y:0},
-            scroll = function(diff,e) {
-                touch.currY = e.targetTouches[0].clientY;
-                touch.y = touch.y + diff;
+            scroll = function(dist,e,end) {
+                var totalTime,
+                    animation = 'ease-out';
+                if (end) {
+                    totalTime = 700;
+                } else{
+                    totalTime = e.timeStamp - touch.currTime;
+                }
 
+                touch.y = touch.y + dist;
                 if (touch.y > 0) touch.y = 0;
                 if (touch.y < -touch.max) touch.y = -touch.max;
 
+                self.node().style.webkitTransition = "-webkit-transform " + totalTime + "ms " + animation;
                 self.node().style.webkitTransform = 'translateY('+touch.y+'px)';
             };
 
         this.addClass('scrollable');
 
         this.on('touchstart',function(_,e){
-            
-            touch.startTime = new Date().getTime();
 
+            touch.startTime = e.timeStamp;
             touch.startY = e.targetTouches[0].clientY;
+
+            touch.currTime = e.timeStamp;
             touch.currY = touch.startY;
 
             touch.page = jab.dom.height(self.node().parentNode);
@@ -146,28 +159,21 @@ jab.html.Element = function() {
         });
 
         this.on('touchmove',function(_,e) {
-            var diff;
-            
-            //diff = e.targetTouches[0].clientY - touch.currY; //Slow
-            diff = e.targetTouches[0].clientY - touch.startY; //Faster on border
-            scroll(diff,e);
+            var dist = e.targetTouches[0].clientY - touch.currY; //Slow
+            scroll(dist,e);
 
+            touch.currTime = e.timeStamp;
             touch.currY = e.targetTouches[0].clientY;
         });
 
         this.on('touchend',function(_,e) {
-            var msec = new Date().getTime() - touch.startTime,
-                moved = touch.currY - touch.startY,
-                diff = e.targetTouches[0].clientY - touch.startY,
-                speed;
+            var time = e.timeStamp - touch.startTime,
+                dist = e.changedTouches[0].clientY - touch.startY,
+                speed = Math.abs(dist / time);
 
-            if (diff && msec) {
-                speed =  Math.abs(diff)/msec;
+            if (dist && time) {
                 if (speed > 0.3 ) {
-                    
-                    diff > 0 ? diff = touch.page : diff = -touch.page;
-                    //diff = diff - moved;
-                    scroll(diff,e);
+                    scroll(dist*speed*6,e,true);
                 }
                 
             }
