@@ -119,7 +119,7 @@ jab.html.Element = function() {
             return;
         }
 
-        //Remove the flick event for iphone (move this)
+        //Remove the flick event for iphone (move this outside)
         document.body.addEventListener("touchmove", function(e) {
             e.preventDefault();
         }, false);

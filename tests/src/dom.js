@@ -55,6 +55,10 @@ var testDom = {
         Y.Assert.areEqual("",this._test.getAttribute('class').trim());
     },
 
+    testGetByID: function() {
+        Y.Assert.isTrue(false);
+    },
+
     testId: function() {
         Y.Assert.isTrue(false);
     },

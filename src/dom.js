@@ -184,3 +184,20 @@ jab.dom.getBody = function() {
     var el = new jab.html.Element();
     return el.load(document.getElementsByTagName('body')[0]);
 };
+
+/**
+ * Return the element with selected id wrapped in a jab.html.Element
+ * @see jab.html.Element
+ * @param {String} id
+ * @return {jab.html.Element}
+ */
+jab.dom.getById = function(id) {
+    var el = new jab.html.Element(),
+        domEl = document.getElementById(id);
+
+    if (domEl) {
+        return el.load(document.getElementById(domEl));
+    } else{
+        return null;
+    }
+};
