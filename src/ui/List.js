@@ -18,6 +18,7 @@ jab.ui.List = function() {
         var item = new jab.html.Element('li');
         item.appendChild(widget)
         this.appendChild(item);
+        return this;
     };
 
     list.constructor = function() {
