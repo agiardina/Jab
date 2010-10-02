@@ -120,7 +120,7 @@ jab.dom.attr = function(el,attr,val) {
     if (typeof val == 'undefined') {
         return el.getAttribute(attr);
     } else {
-        el.setAttribute(attr,val)
+        el.setAttribute(attr,val);
         return jab.dom;
     }
 
@@ -196,7 +196,7 @@ jab.dom.getById = function(id) {
         domEl = document.getElementById(id);
 
     if (domEl) {
-        return el.load(document.getElementById(domEl));
+        return el.load(domEl);
     } else{
         return null;
     }
