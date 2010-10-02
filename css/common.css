@@ -1,6 +1,7 @@
 html { height: 100% }
 body { height: 100%; margin: 0px; padding: 0px; background: black;}
 
+
 .hide {
     display:none;
 }
@@ -44,7 +45,10 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     background:url('../img/toolbar.png') repeat-x;
 }
 
-.footer {}
+.footer {
+    position:relative;
+    z-index:1;
+}
 
 .body {
     background:black;
@@ -204,41 +208,44 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 .id-card {-webkit-mask-box-image: url(/Jab/img/icons/id-card.png)}
 
 
-.textarea {
-    border:4px solid #ccc;
-    -webkit-border-radius:4px;
-    display:block;
-    -webkit-box-flex:1;
-}
-
-.field input {
+.field .input {
     border:2px solid #ccc;
     display:block;
     font-size:1.2em;
+    width:100%;
     -webkit-border-radius:4px;
+    -webkit-box-sizing:border-box;
 }
 
-.field {
-    display:block;
-    
+.field .textarea {
+    height: 70px;
+    font-size:1em;
 }
 
 .field span {
     color:white;
     display:block;
+    font: bold 1em sans-serif;
+}
+
+.field {
+    margin:5px;
+    display:block;
+    -webkit-box-orient: vertical;
 }
 
 #popup {
     position:absolute;
     z-index: 100;
     width:90%;
-    height:90%;
     opacity:1;
     top:5%;
     left:5%;
     margin:auto;
+    padding:5px;
     border:2px solid #666;
     -webkit-border-radius:15px;
     background:rgba(0,0,0,0.7);
     -webkit-transition: opacity 0.5s linear;
+    -webkit-box-sizing:border-box;
 }
