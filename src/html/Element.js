@@ -39,14 +39,6 @@ jab.html.Element = function() {
         }
     };
 
-    element.clear = function() {
-        var node = this.node();
-        while(node.firstChild) {
-           node.removeChild(node.firstChild);
-        }
-        node = null;
-    };
-
     element.content = function (text) {
         if (typeof text == 'undefined') {
             return this.node().textContent;
@@ -114,6 +106,18 @@ jab.html.Element = function() {
         refEl.parentNode.insertBefore(this.node(),refEl);
     };
 
+    element.remove = function() {
+        this.node().parentNode.removeChild(this.node());
+    };
+
+    element.clear = function() {
+        var node = this.node();
+        while(node.firstChild) {
+           node.removeChild(node.firstChild);
+        }
+        node = null;
+    };
+
     element.scrollable = function() {
         if (!('ontouchstart' in document.documentElement)) {
             return;
@@ -133,6 +137,7 @@ jab.html.Element = function() {
                     totalTime = 700;
                 } else{
                     totalTime = e.timeStamp - touch.currTime;
+                    totalTime = 0;
                 }
 
                 touch.y = touch.y + dist;
@@ -221,7 +226,7 @@ jab.html.Element = function() {
                 var args = [],
                     res;
                     
-                args[0] = this._node;
+                args[0] = this.node();
                 for (var i = 0,len = arguments.length;i<len;i++) {
                     args[i+1] = arguments[i];
                 }
