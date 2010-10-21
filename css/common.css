@@ -1,5 +1,6 @@
 html { height: 100% }
-body { height: 100%; margin: 0px; padding: 0px; background: black;}
+/*body { height: 100%; margin: 0px; padding: 0px; background: black;}*/
+body { margin: 0px; padding: 0px; background: black;font-family:sans-serif}
 
 
 .hide {
@@ -168,10 +169,11 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 /*    background:url('../img/bgToolbar.png') repeat-x;*/
     background:black;
     color:white;
-    border-top:2px solid #666;
+    border-bottom:2px solid #666;
+    border-bottom:2px solid orange;
 }
 .toolbar>div{
-    margin:0 2px 4px 2px;
+    margin:4px 2px 0 2px;
 }
 .toolbar .button {
     text-align:center;
@@ -191,17 +193,18 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
 .toolbar .button.active {
 /*    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px -1px 0px;background: rgba(255, 255, 255, 0.2);*/
     background:#666;
+    background:orange;
     color:black;
-    color:white;
-    -webkit-border-bottom-right-radius:7px;
-    -webkit-border-bottom-left-radius:7px;
+    -webkit-border-top-right-radius:4px;
+    -webkit-border-top-left-radius:4px;
 
 }
 
 .icon {width:24px;height:22px;margin-top:2px;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(hsla(0, 100%, 100%, 0.597656)), to(rgba(255, 255, 255, 0.296875)))}
 .icontext {font-size:14px;color:black}
 .notice {color:red;}
-.active .icon {background: -webkit-gradient(linear, 38% 0%, 60% 70%, from(orange), to(orange))}
+.active .icon {background: -webkit-gradient(linear, 38% 0%, 60% 70%, from(black), to(black))}
+.active .icon .icontext {color:orange}
 .chat {-webkit-mask-box-image: url(/Jab/img/icons/chat.png)}
 .chat2 {-webkit-mask-box-image: url(/Jab/img/icons/chat2.png)}
 .radar {-webkit-mask-box-image: url(/Jab/img/icons/compass.png)}
@@ -239,7 +242,7 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     z-index: 100;
     width:90%;
     opacity:1;
-    top:5%;
+    top:15%;
     left:5%;
     margin:auto;
     padding:5px;
@@ -249,3 +252,26 @@ body { height: 100%; margin: 0px; padding: 0px; background: black;}
     -webkit-transition: opacity 0.5s linear;
     -webkit-box-sizing:border-box;
 }
+
+#info {
+    color:white;
+    position:absolute;
+    text-align: center;
+    z-index: 110;
+    width:90%;
+    opacity:0;
+    top:5%;
+    left:5%;
+    margin:auto;
+    padding:5px;
+    border:2px solid #666;
+    -webkit-border-radius:5px;
+    background:rgba(0,0,0,0.8);
+    -webkit-transition: opacity 0.5s ease-out;
+    -webkit-box-sizing:border-box;
+}
+
+#info.show {
+    opacity:1;
+}
+

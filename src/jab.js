@@ -1,6 +1,12 @@
+/**
+ * @namespace jab
+ */
 jab = {};
+
+/**
+ * @namespace jab.html
+ */
 jab.html = {};
-jab.ui   = {};
 
 /**
 * Define the prototype object for a function.
@@ -54,13 +60,12 @@ jab.load = function(scripts,basepath) {
         }
         document.write('<script src="'+ file +'" type="text/javascript"></script>');
     }
-        
 };
 
 jab.init = function(basepath) {
     jab.load([
         '/src/ext/json2.min.js',
-        "http://maps.google.com/maps/api/js?sensor=true",
+        "http://maps.google.com/maps/api/js?v=3.0&sensor=true",
         "/src/dom.js",
         "/src/cache/Cache.js",
         "/src/mvp/MVPObject.js",
@@ -74,6 +79,8 @@ jab.init = function(basepath) {
         "/src/mvp/RpcCommand.js",
         "/src/mvp/View.js",
         "/src/mvp/Presenter.js",
+        "/src/ui.js",
+        "/src/ui/Button.js",
         "/src/ui/Button.js",
         "/src/ui/Layout.js",
         "/src/ui/List.js",

@@ -1,3 +1,6 @@
+/**
+ * @class
+ */
 jab.html.Element = function() {
     var element = new jab.MVPObject(),
         dom = ['hasClass','addClass','removeClass','style',
@@ -124,9 +127,9 @@ jab.html.Element = function() {
         }
 
         //Remove the flick event for iphone (move this outside)
-        document.body.addEventListener("touchmove", function(e) {
+/*        document.body.addEventListener("touchmove", function(e) {
             e.preventDefault();
-        }, false);
+        }, false); */
 
         var self = this,
             touch = {x:0,y:0},
@@ -218,6 +221,7 @@ jab.html.Element = function() {
 
     /**
      * Copy methods from jab.dom
+     * @ignore
      */
     for (var i=0,len=dom.length;i<len;i++) {
         var fn = dom[i];

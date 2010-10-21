@@ -1,7 +1,23 @@
+/**
+ * jab.ui.Map provides an API for Google Maps
+ * @augments jab.html.Element
+ * @namespace jab.ui
+ * @class Map
+ */
 jab.ui.Map = function() {
     
+    /**
+     * Internal prototype for jab.ui.Map
+     * @name map
+     */
     var map = new jab.html.Element();
 
+    /**
+     * The map constructor
+     * @name jab.ui.Map.prototype.constructor
+     * @param {String} name The name of the map. The name is also used as css class for the map instance.
+     * @constructor
+     */
     map.constructor = function(name){
         this._markers = {};
         if (name) {
@@ -10,12 +26,17 @@ jab.ui.Map = function() {
         }
     };
 
+    /**
+     * It loads a map object
+     * @methodOf jab.ui.Map#
+     * @name jab.ui.Map.prototype.load
+     */
     map.load = function() {
         jab.html.Element.prototype.load.apply(this,arguments);
         
         var self = this;
         this.node().addEventListener('DOMNodeRemovedFromDocument', function() {
-            self.free();
+            //self.free();
             self.fireEvent('mapInvisible');
         },false);
 
@@ -29,12 +50,24 @@ jab.ui.Map = function() {
 
     };
 
+    /**
+     * It initializes a map object
+     * @methodOf jab.ui.Map#
+     * @name jab.ui.Map.prototype.init
+     */
     map.init = function() {
         jab.html.Element.prototype.init.apply(this,arguments);
         this.addClass('map');
         return this;
     };
-    
+
+    /**
+     * Show the map and set the center using the lat and lng parameters
+     * @methodOf jab.ui.Map#
+     * @name jab.ui.Map.prototype.show
+     * @param {Number} lat The latitude of the center
+     * @param {Number} lng The longitude of the center
+     */
     map.show = function (lat, lng) {
         var latlng = new google.maps.LatLng(lat, lng),
             zoom = 12,
@@ -43,6 +76,7 @@ jab.ui.Map = function() {
                 center: latlng,
                 mapTypeControl: false,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
+                streetViewControl: false,
                 navigationControlOptions: {style: google.maps.NavigationControlStyle.ANDROID},
             };
 
@@ -79,6 +113,8 @@ jab.ui.Map = function() {
      * Add a marker to the map. If the id param is used the marker will be
      * stored to be used after. There is no check to verify if a marker
      * with the same id has been already added.
+     * @methodOf jab.ui.Map#
+     * @name jab.ui.Map.prototype.addMarker
      * @see #marker
      * @see #deleteMarker
      * @see #moveMarker

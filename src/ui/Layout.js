@@ -1,3 +1,9 @@
+/**
+ *
+ * @namespace jab.ui
+ * @class Layout
+ *
+ */
 jab.ui.Layout = function() {
     
     var layout = new jab.html.Element();

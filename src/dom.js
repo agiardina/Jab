@@ -1,7 +1,19 @@
+/*
+ * @module HTML
+ */
+
 /**
- * Wraps an HTMLElement.
  * @see Element
+ * @namespace jab
+ * @class dom
+ * @static 
+ *
+ */
+
+/**
+ * Wrap an html element
  * @param {HTMLElement} element the HTMLElement to wrap
+ * @function jab.dom
  * @return {Element}
  */
 jab.dom = function(element) {
@@ -14,8 +26,10 @@ jab.dom = function(element) {
     }
 };
 
+
 /**
  * Search for a css class inside an html element
+ * @static
  * @param {HTMLElement} el The target html element
  * @param {String} classname The classname to search
  * @return {Boolean} True if classname found
@@ -34,6 +48,7 @@ jab.dom.hasClass = function(el,classname) {
 };
 
 /**
+ * @static
  * @param {HTMLElement} el The target html element
  * @param {String} id The id to set
  * @return {String} the id
@@ -47,6 +62,7 @@ jab.dom.id = function(el,id) {
 
 /**
  * Add a class to dom element
+ * @static
  * @param {HTMLElement} el The target HTMLELement
  * @param {String} classname The css class to add to element
  * @return {Function} Return the jab.dom function to allow chaininig
@@ -70,6 +86,7 @@ jab.dom.addClass = function(el,classname) {
 
 /**
  * Remove class from an HTMLElement
+ * @static
  * @param {HTMLElement} el The target HTMLElement
  * @param {String} classname The classname to remove
  * @return {Function} Return the jab.dom function to allow chaining

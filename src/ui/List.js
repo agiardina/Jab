@@ -1,3 +1,6 @@
+/**
+* @class List
+*/
 jab.ui.List = function() {
     
     var list = new jab.html.Element();
@@ -21,6 +24,9 @@ jab.ui.List = function() {
         return this;
     };
 
+    /**
+    * @constructor The a
+    */
     list.constructor = function() {
         this.init('ul','list');
     };

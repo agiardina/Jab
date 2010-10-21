@@ -1,3 +1,8 @@
+/**
+ * @module UI
+ * @namespace jab.ui
+ * @class Button
+ */
 jab.ui.Button = function() {
 
     var button = new jab.html.Element();
