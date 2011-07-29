@@ -31,7 +31,7 @@ define('demo.balls', ['require','jab/ba/pool','jab/ba/ball'], function (require,
 		;
 			
 		
-		for (i=0;i<25;i++) {
+		for (i=0;i<35;i++) {
 			color1 = Math.floor(Math.random() * 255);
 			color2 = Math.floor(Math.random() * 255);
 			color3 = Math.floor(Math.random() * 255);
