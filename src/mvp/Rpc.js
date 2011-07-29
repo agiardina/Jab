@@ -35,7 +35,7 @@ jab.Rpc = function() {
         req = this._req;
 
         //Open the connection
-        req.open(command.type(),command.url(),true)
+        req.open(command.type(),command.url(),true);
 
         //Is it post?
         if (command.type() == 'POST') {
@@ -67,7 +67,7 @@ jab.Rpc = function() {
                     command.error(req.status);
                 }
             }
-        }
+        };
 
         req.send(command.params());
     };
@@ -76,4 +76,3 @@ jab.Rpc = function() {
     return rpc.constructor;
     
 }();
-

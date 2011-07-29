@@ -37,7 +37,7 @@ jab.MVPObject = function() {
         //Replace the events function 
         this.events = function() {
             return events;
-        }
+        };
         return this.events();
             
     };

@@ -55,7 +55,7 @@ jab.dom.hasClass = function(el,classname) {
  */
 jab.dom.id = function(el,id) {
     if (typeof id != 'undefined') {
-        el.id = id
+        el.id = id;
     }
     return el.id;
 };
@@ -199,7 +199,7 @@ jab.dom.focus = function(el) {
  */
 jab.dom.getBody = function() {
     var el = new jab.html.Element();
-    return el.load(document.getElementsByTagName('body')[0]);
+    return el.load(document.body);
 };
 
 /**

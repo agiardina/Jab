@@ -128,9 +128,9 @@ jab.html.Element = function() {
 
         //Remove the flick event for iphone (move this outside)
 /*        document.body.addEventListener("touchmove", function(e) {
-            e.preventDefault();
-        }, false); */
-
+           e.preventDefault();
+        }, false); 
+*/
         var self = this,
             touch = {x:0,y:0},
             scroll = function(dist,e,end) {
