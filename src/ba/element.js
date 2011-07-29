@@ -65,7 +65,7 @@ define('jab/ba/element', ['require','exports'], function (require,exports) {
 	};
 	
 	self.updatePosLinear = function () {
-		var cnx = app.cnx;
+		var cnx = this.context;
 		
 		if (this.toX !== undefined) {
 			if (this.moves > 0 ) {

@@ -16,7 +16,7 @@ define('jab/ba/ball', ['require','exports','jab/ba/element'], function (require,
 	};
 	
 	self.draw = function () {
-		var cnx = app.cnx;
+		var cnx = this.context;
 		cnx.fillStyle = this.color;
 		cnx.beginPath();
 		

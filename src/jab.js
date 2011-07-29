@@ -83,7 +83,7 @@
 	
 	require.async = function (id,loaded) {
 		var xhr = new XMLHttpRequest(),
-			file = 'js/' + id + '.js';
+			file = define.baseUrl + id + '.js';
 		
 		xhr.open('GET', file, true);
 		xhr.onreadystatechange = function () {
