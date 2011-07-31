@@ -4,6 +4,7 @@ define('jab/ba/pool', ['require','exports','jab/ba/element'], function (require,
 	}
 	
 	var Element = element.Element; 
+	
 	self = new Element({
 		x:0,
 		y:0

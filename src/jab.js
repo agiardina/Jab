@@ -10,6 +10,7 @@
 	}
 	
 	function define(id,dependencies,fn) {
+		
 		var required = dependencies.concat();
 		
 		function resolve (done) {
@@ -17,10 +18,10 @@
 			
 			if (dependencies.length) {
 				file = dependencies.shift();
+				//console.log(file);
 				if (file && file !== 'require' && file !== 'exports') {
 					//Check if the file has been already downloaded
 					if (!cache[file]) {
-						cache[file] = stack.length; //We save the position of the file inside the stack
 						require.async(file, function () {
 							resolve(done);
 						});
@@ -37,6 +38,7 @@
 			}
 		}
 		deep++;
+		cache[id] = stack.length; //We save the position of the file inside the stack
 		stack.push({id:id,dependencies:required,fn:fn});
 		
 		resolve(function () {
@@ -67,6 +69,9 @@
 						} else if (module === 'exports') {
 							dependencies.push(exports);
 						} else {
+							if (!modules[module]) {
+								throw "Module " + module + " not found";
+							}
 							dependencies.push(modules[module]);
 						}
 					}
@@ -91,7 +96,7 @@
 			if (xhr.readyState === 4) {
 				if(xhr.status === 200) {
 					text = xhr.responseText;
-					text += "//@ sourceURL=" + window.location.protocol + '//' + window.location.host + file;
+					text += "//@ sourceURL=" + window.location.protocol + '//' + window.location.host + id + '.js';
 					eval(text);
 					loaded();
 				} else {

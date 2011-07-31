@@ -1,6 +1,6 @@
 define.baseUrl = '../../';
 
-define('demo.balls', ['require','jab/ba/pool','jab/ba/ball'], function (require,pool,ball) {
+define('demo.balls', ['require','jab/ba/pool','jab/ba/ball','jab/ba/vector'], function (require,pool,ball,ph) {
 	
 	
 	function drawScreen(all) {
@@ -46,12 +46,13 @@ define('demo.balls', ['require','jab/ba/pool','jab/ba/ball'], function (require,
 				speed:3,
 				x: Math.random() * pool.width,
 				y: Math.random() * pool.height,
-				angle: angle,
 				radius: radius,
 				mass: radius * 8,
 				friction: 0.005,
 				bouncing: true
 			});
+			vector(ball);
+			ball.moveAngle(angle);
 			
 			pool.push(ball);
 		}
@@ -71,6 +72,7 @@ define('demo.balls', ['require','jab/ba/pool','jab/ba/ball'], function (require,
 	
 	var Pool = pool.Pool,
 		Ball = ball.Ball,
+		vector = ph.vector,
 		canvas = document.getElementById('canvas'),
 		context = canvas.getContext('2d');
 	
